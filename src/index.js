@@ -2,21 +2,25 @@ import "./styles.css";
 
 // import libs from "./js/libs.js";
 
-import fetchObject from "./js/fetch.js";
+import fetchObject from "./js/fetchCountries.js";
 
-import galleryRefs from "./js/refs.js";
+import galleryRefs from "./js/refs";
+import debounce from "lodash.debounce";
 
-const { form, searchBtn, gallery } = galleryRefs;
+const { input, searchBtn, gallery } = galleryRefs;
 
 // console.log(form, searchBtn, gallery);
 
-form.addEventListener("submit", (e) => {
+var debouncedFunction = debounce(
+  (inputValue) => {
+    fetchObject.fetchCountries(inputValue, gallery);
+  },
+  500,
+  {}
+);
+
+input.addEventListener("input", (e) => {
   e.preventDefault();
-  //   console.log(e);
-  //   console.log(e.target);
-  //   console.log(e.target.elements);
-  //   console.log(e.target.elements.query);
-  console.log(e.target.elements.qwery.value);
-  const inputValue = e.target.elements.qwery.value;
-  fetchObject.getFetch(inputValue, gallery);
+  let value = e.target.value;
+  debouncedFunction(value);
 });

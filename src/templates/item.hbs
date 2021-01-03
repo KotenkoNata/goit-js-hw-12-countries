@@ -1,6 +1,16 @@
-{{#each this}}
-<li>
-    <img src={{src.original}} data-source={{src.large}} width="300" alt="{{photographer}}">
-    <h3>{{photographer}}</h3>
-</li>
-{{/each}}
+<h2>{{name}}</h2>
+
+<div class="country-details">
+    <div class="text-content">
+        <h3>Capital: <span>{{capital}}</span></h3>
+        <h3>Population: <span>{{population}}</span></h3>
+        <ul class="languages-list"> Languages:
+            {{#each languages}}
+            <li class="languages-items">{{this.name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="images">
+        <img src={{flag}} alt={{name}} width="400">
+    </div>
+</div>
